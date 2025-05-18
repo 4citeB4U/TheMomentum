@@ -1,0 +1,2311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOMENTUM - Artist Platform Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Base variables */
+        :root {
+            --primary-bg: #1A0A0A;
+            --secondary-bg: #2A1A10;
+            --accent-yellow: #FFD700;
+            --accent-orange: #FF8C00;
+            --accent-red: #FF4500;
+            --text-primary: #FFF8E6;
+            --text-secondary: #D4C6A8;
+            --shadow-normal: 0 10px 30px -10px rgba(27, 12, 2, 0.7);
+            --shadow-hover: 0 20px 40px rgba(255, 215, 0, 0.2);
+            --transition-standard: all 0.3s ease;
+            --template-badge-bg: #FF0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Template Banner */
+        .template-badge {
+            position: fixed;
+            top: 50%;
+            right: -65px;
+            transform: rotate(90deg) translateY(-50%);
+            background-color: var(--template-badge-bg);
+            color: white;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .template-ribbon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--template-badge-bg);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .template-ribbon a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 900;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .logo-accent {
+            background: linear-gradient(to right, var(--accent-yellow), var(--accent-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-right: 5px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition-standard);
+        }
+
+        .main-nav a:hover {
+            color: var(--accent-yellow);
+        }
+
+        .main-nav a.active {
+            color: var(--accent-yellow);
+        }
+
+        .main-nav a.active::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-yellow);
+            bottom: -6px;
+            left: 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--accent-yellow), var(--accent-red));
+            color: var(--primary-bg);
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            transition: var(--transition-standard);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero section */
+        .hero {
+            padding: 6rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(255, 69, 0, 0.3), transparent 60%),
+                        radial-gradient(circle at bottom left, rgba(255, 215, 0, 0.2), transparent 60%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-eyebrow {
+            color: var(--accent-yellow);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, var(--accent-yellow), var(--accent-red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 90%;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .secondary-button {
+            background: transparent;
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            transition: var(--transition-standard);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .secondary-button:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        /* Features section */
+        .features {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-eyebrow {
+            color: var(--accent-yellow);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-heading {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .feature-item {
+            background-color: var(--secondary-bg);
+            padding: 2.5rem;
+            border-radius: 12px;
+            transition: var(--transition-standard);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .feature-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-yellow), var(--accent-red));
+            opacity: 0;
+            transition: var(--transition-standard);
+            z-index: -1;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .feature-item:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+            color: var(--accent-yellow);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition-standard);
+        }
+
+        .feature-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Showcase section */
+        .showcase {
+            padding: 8rem 0;
+            background-color: rgba(17, 34, 64, 0.6);
+            position: relative;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase-img {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-normal);
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: scale(1);
+            transition: transform 0.5s ease;
+        }
+
+        .showcase-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .showcase-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .showcase-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .showcase-list li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .showcase-list li::before {
+            content: '✓';
+            color: var(--accent-yellow);
+            font-weight: bold;
+        }
+
+        /* Call to Action section */
+        .cta-section {
+            padding: 8rem 0;
+            background-color: var(--primary-bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-container {
+            background-color: var(--secondary-bg);
+            padding: 4rem;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 69, 0, 0.2) 0%, rgba(255, 215, 0, 0.2) 100%);
+            z-index: -1;
+        }
+
+        .cta-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .cta-price {
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-price strong {
+            color: var(--accent-yellow);
+            font-size: 1.5rem;
+        }
+
+        /* NFT feature section */
+        .nft-feature {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .nft-examples {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .nft-card {
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition-standard);
+            box-shadow: var(--shadow-normal);
+        }
+
+        .nft-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nft-img {
+            width: 100%;
+            height: 0;
+            padding-bottom: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nft-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition-standard);
+        }
+
+        .nft-card:hover .nft-img img {
+            transform: scale(1.1);
+        }
+
+        .nft-content {
+            padding: 1.5rem;
+        }
+
+        .nft-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .nft-price {
+            color: var(--accent-yellow);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .nft-owner {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .nft-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--accent-red);
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0 2rem;
+            background-color: var(--secondary-bg);
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 900;
+            display: inline-block;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-standard);
+            overflow: hidden;
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-link.twitter {
+            background-color: #000000;
+        }
+
+        .social-link.twitter:hover {
+            background-color: #1DA1F2;
+        }
+
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .social-link.facebook {
+            background-color: #1877F2;
+        }
+
+        .social-link.snapchat {
+            background-color: #FFFC00;
+        }
+
+        .social-link.snapchat svg {
+            fill: #000000;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition-standard);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Screen reader only class */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Admin back button */
+        .admin-back-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--accent-red);
+            color: white;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition-standard);
+        }
+
+        .admin-back-button:hover {
+            background-color: var(--accent-yellow);
+            transform: translateY(-2px);
+        }
+
+        /* Ad banner */
+        .ad-banner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            background: linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-red) 100%);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 3rem 0;
+            box-shadow: var(--shadow-normal);
+            color: var(--primary-bg);
+        }
+
+        .ad-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .ad-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+        }
+
+        .ad-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .ad-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .ad-video {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Adaptation Section Styles */
+        .adaptation-section {
+            background-color: var(--secondary-bg);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .adaptation-dashboard {
+            background-color: var(--primary-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-normal);
+        }
+
+        .adaptation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .adaptation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #666;
+            margin-right: 8px;
+        }
+
+        .status-dot.active {
+            background-color: var(--accent-yellow);
+            box-shadow: 0 0 8px var(--accent-yellow);
+            animation: pulse 2s infinite;
+        }
+
+        .panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .panel-title {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .learning-section, .console-output {
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .learning-entry {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--accent-yellow);
+        }
+
+        .entry-timestamp {
+            color: var(--text-secondary);
+        }
+
+        .console-panel {
+            margin-bottom: 0;
+        }
+
+        .console-line {
+            margin-bottom: 0.5rem;
+            font-family: monospace;
+        }
+
+        .console-time {
+            color: var(--accent-yellow);
+            margin-right: 0.5rem;
+        }
+
+        .console-input {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .console-prompt {
+            color: var(--accent-yellow);
+            margin-right: 0.5rem;
+            font-family: monospace;
+        }
+
+        .console-command {
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: monospace;
+            width: 100%;
+            outline: none;
+        }
+
+        .template-section {
+            padding: 1rem;
+        }
+
+        .template-item {
+            margin-bottom: 1rem;
+        }
+
+        .template-name {
+            font-weight: bold;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .template-description {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .template-code {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .helper-list {
+            padding: 1rem;
+        }
+
+        .helper-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .helper-name {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .helper-status {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            background-color: #666;
+        }
+
+        .status-ready {
+            background-color: var(--accent-yellow);
+            color: var(--primary-bg);
+        }
+
+        .helper-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+        }
+
+        .btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-warning {
+            background-color: var(--accent-orange);
+            color: var(--primary-bg);
+        }
+
+        .btn-danger {
+            background-color: var(--accent-red);
+            color: var(--primary-bg);
+        }
+
+        /* Database Section Styles */
+        .database-section {
+            background-color: var(--primary-bg);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .db-status {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .db-actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .panel-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .db-store {
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .db-store-name {
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .db-store-count {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: var(--accent-red);
+            color: white;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .refresh-btn {
+            background: none;
+            border: none;
+            color: var(--accent-yellow);
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .refresh-icon {
+            margin-right: 0.3rem;
+        }
+
+        .db-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .metric {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Logger Section Styles */
+        .logger-section {
+            background-color: var(--secondary-bg);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            margin: 1rem 0;
+        }
+
+        .filter-btn {
+            border: none;
+            border-radius: 3px;
+            padding: 0.3rem 0.8rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+
+        .filter-btn.active {
+            opacity: 1;
+        }
+
+        .filter-info { background-color: #3498db; color: white; }
+        .filter-success { background-color: #2ecc71; color: white; }
+        .filter-warning { background-color: var(--accent-orange); color: white; }
+        .filter-error { background-color: var(--accent-red); color: white; }
+        .filter-debug { background-color: #9b59b6; color: white; }
+
+        #log-container {
+            background-color: var(--primary-bg);
+            border-radius: 6px;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            margin: 0.3rem 0;
+            padding: 0.5rem;
+            border-left: 3px solid #ccc;
+        }
+
+        .log-info { border-left-color: #3498db; }
+        .log-success { border-left-color: #2ecc71; }
+        .log-warning { border-left-color: var(--accent-orange); }
+        .log-error { border-left-color: var(--accent-red); }
+        .log-debug { border-left-color: #9b59b6; }
+
+        .timestamp {
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+        }
+
+        .module-name {
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .log-level {
+            display: inline-block;
+            padding: 0 0.4rem;
+            border-radius: 3px;
+            color: white;
+            font-size: 0.8rem;
+            width: 55px;
+            text-align: center;
+            margin-right: 0.5rem;
+        }
+
+        .level-info { background-color: #3498db; }
+        .level-success { background-color: #2ecc71; }
+        .level-warning { background-color: var(--accent-orange); }
+        .level-error { background-color: var(--accent-red); }
+        .level-debug { background-color: #9b59b6; }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        /* Worker Section Styles */
+        .worker-section {
+            background-color: var(--primary-bg);
+            padding: 3rem 0;
+            margin-top: 2rem;
+        }
+
+        .worker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-badge {
+            font-size: 0.8rem;
+            background-color: var(--accent-yellow);
+            color: var(--primary-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .status-badge:before {
+            content: "";
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--primary-bg);
+            margin-right: 5px;
+        }
+
+        .worker-stats {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-yellow);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .task-list {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .task-item {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent-yellow);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-id {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .task-status {
+            font-size: 0.8rem;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            background-color: #999;
+        }
+
+        .status-pending {
+            background-color: var(--accent-orange);
+        }
+
+        .status-processing {
+            background-color: #3498db;
+        }
+
+        .status-completed {
+            background-color: #2ecc71;
+        }
+
+        .status-failed {
+            background-color: var(--accent-red);
+        }
+
+        .task-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: right;
+            margin-top: 0.5rem;
+        }
+
+        /* Additional utility classes */
+        .db-status-dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent-yellow);
+            margin-right: 5px;
+        }
+
+        .disaster-recovery-status {
+            margin-top: 20px;
+            padding: 10px;
+            background: #FFF8E6;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent-yellow);
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nft-examples {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .cta-buttons .cta-button,
+            .cta-buttons .secondary-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Template Indicators -->
+    <div class="template-ribbon">
+        🔥 THIS IS A TEMPLATE FOR SALE - Premium Artist Website Template - <a href="#">BUY NOW $2,500</a> 🔥
+    </div>
+    <div class="template-badge">TEMPLATE</div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-accent">MOMEN</span>TUM
+            </a>
+
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="bio.html">Bio</a></li>
+                    <li><a href="merch.html">Merch</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="pfxopuiy0d.html">Admin</a></li>
+                </ul>
+            </nav>
+
+            <button type="button" class="mobile-menu-btn">☰</button>
+
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-eyebrow">Artist Platform Template</span>
+                <h1 class="hero-title">Turn Your <span>Creative Vision</span> Into A Digital Empire</h1>
+                <p class="hero-description">
+                    A full-featured platform built for artists who want to own their audience and monetize their creativity. No more giving away profits to streaming services or social platforms.
+                </p>
+                <div class="hero-cta">
+                    <a href="#" class="cta-button">Buy This Template</a>
+                    <a href="#" class="secondary-button">View Features</a>
+                </div>
+            </div>
+
+            <!-- Hero Image or background will be positioned in the backgrounds -->
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-eyebrow">Why choose momentum</span>
+                <h2 class="section-heading">Everything You Need To Build Your Brand</h2>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <span class="feature-icon">🗂️</span>
+                    <h3 class="feature-title">Multi-Page Setup</h3>
+                    <p class="feature-description">
+                        Separate pages for Home, Music, Merch, Events, and Contact, all designed to be fast and mobile-first.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">🖼️</span>
+                    <h3 class="feature-title">NFT Drop Center</h3>
+                    <p class="feature-description">
+                        Verified NFT gallery with unlockable perks, and integrated resale tracking via OpenSea.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">🎥</span>
+                    <h3 class="feature-title">Video Vault</h3>
+                    <p class="feature-description">
+                        Gated content area for behind-the-scenes, unreleased footage, or drops for your fans.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">🔴</span>
+                    <h3 class="feature-title">Livestream Hub</h3>
+                    <p class="feature-description">
+                        Embed Twitch, YouTube Live, IG Live, or OBS sessions into a dedicated feed.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">👕</span>
+                    <h3 class="feature-title">Merch Designer Tool</h3>
+                    <p class="feature-description">
+                        Upload designs to preloaded templates (tees, hoodies, hats) — mockup-ready.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+
+                <div class="feature-item">
+                    <span class="feature-icon">🧑‍🤝‍🧑</span>
+                    <h3 class="feature-title">Fan Membership Options</h3>
+                    <p class="feature-description">
+                        Offer exclusive content, downloads, or RSVP perks to paying supporters.
+                    </p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Showcase Section -->
+    <section class="video-feature">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-eyebrow">Featured Content</span>
+                <h2 class="section-heading">Video Showcase</h2>
+            </div>
+
+            <div class="video-container">
+                <div class="video-frame">
+                    <video width="100%" height="auto" controls>
+                        <source src="add1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-img">
+                    <img src="gmspqq4ge2.png" alt="The Momentum Platform">
+                </div>
+
+                <div class="showcase-content">
+                    <h2 class="showcase-title">A Platform That Works For You</h2>
+                    <p class="showcase-description">
+                        At this level, your platform starts to work for you. You're not juggling 10 tools — your site is your tool.
+                    </p>
+
+                    <ul class="showcase-list">
+                        <li>Multiple Revenue Streams — Merch, NFTs, memberships, livestreams</li>
+                        <li>Automated Engagement — Keep fans connected without manual work</li>
+                        <li>Scalable Brand Experience — Add content, campaigns, products easily</li>
+                        <li>Full Control — No third-party platform fees or restrictions</li>
+                    </ul>
+
+                    <a href="#" class="cta-button">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio Section (Embedded from bio.html) -->
+    <section class="bio-section">
+        <div class="container bio-container">
+            <div class="bio-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800' width='600' height='800'%3E%3Crect width='600' height='800' fill='%231A0A0A' /%3E%3Ccircle cx='300' cy='250' r='180' fill='%23FF4500' /%3E%3Crect x='150' y='400' width='300' height='350' fill='%23FFD700' opacity='0.5' /%3E%3C/svg%3E" alt="Artist Profile Image">
+            </div>
+
+            <div class="bio-content">
+                <h2>The Story</h2>
+                <p>
+                    Born in [City], [Artist Name] has been creating music since the age of [age]. What started as a bedroom project has evolved into a full-fledged artistic vision that spans music, visual art, and digital experiences.
+                </p>
+                <p>
+                    After releasing [First Project] in [Year], [Artist Name] gained recognition for <span class="highlight">[unique sound or characteristic]</span>. This distinctive approach has earned [him/her/them] a devoted following and critical acclaim from publications like [Publication] and [Publication].
+                </p>
+            </div>
+        </div>
+
+        <div class="container bio-container">
+            <div class="bio-content">
+                <h2>The Vision</h2>
+                <p>
+                    [Artist Name]'s work explores themes of <span class="highlight">[Theme]</span>, <span class="highlight">[Theme]</span>, and <span class="highlight">[Theme]</span>. Each project is an opportunity to push creative boundaries while maintaining an authentic connection with the audience.
+                </p>
+                <p>
+                    "I believe that [Artistic Philosophy]," says [Artist Name]. "My goal is to [Mission Statement], creating work that [Desired Impact]."
+                </p>
+            </div>
+
+            <div class="video-container">
+                <div class="video-frame">
+                    <video width="100%" height="auto" controls>
+                        <source src="add2.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NFT Feature Section -->
+    <section class="nft-feature">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-eyebrow">exclusive nft drops</span>
+                <h2 class="section-heading">Verified NFT Gallery</h2>
+            </div>
+
+            <div class="nft-examples">
+                <div class="nft-card">
+                    <div class="nft-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='200' height='200'%3E%3Crect width='100' height='100' fill='%23FF4500' /%3E%3Ccircle cx='50' cy='50' r='40' fill='%23FFD700' /%3E%3C/svg%3E" alt="NFT Example 1">
+                    </div>
+                    <div class="nft-content">
+                        <h3 class="nft-title">Digital Album Art</h3>
+                        <div class="nft-price">0.5 ETH</div>
+                        <div class="nft-owner">
+                            <div class="nft-avatar"></div>
+                            <span>Owned by @fan1324</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nft-card">
+                    <div class="nft-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='200' height='200'%3E%3Crect width='100' height='100' fill='%23FF8C00' /%3E%3Cpolygon points='50,15 85,85 15,85' fill='%23FFD700' /%3E%3C/svg%3E" alt="NFT Example 2">
+                    </div>
+                    <div class="nft-content">
+                        <h3 class="nft-title">Concert Pass #42</h3>
+                        <div class="nft-price">0.3 ETH</div>
+                        <div class="nft-owner">
+                            <div class="nft-avatar"></div>
+                            <span>Owned by @musiclover</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nft-card">
+                    <div class="nft-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='200' height='200'%3E%3Crect width='100' height='100' fill='%231A0A0A' /%3E%3Ccircle cx='30' cy='30' r='20' fill='%23FF4500' /%3E%3Ccircle cx='70' cy='70' r='20' fill='%23FFD700' /%3E%3C/svg%3E" alt="NFT Example 3">
+                    </div>
+                    <div class="nft-content">
+                        <h3 class="nft-title">Limited Artwork</h3>
+                        <div class="nft-price">0.7 ETH</div>
+                        <div class="nft-owner">
+                            <div class="nft-avatar"></div>
+                            <span>Owned by @collector99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nft-card">
+                    <div class="nft-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' width='200' height='200'%3E%3Crect width='100' height='100' fill='%232A1A10' /%3E%3Crect x='20' y='20' width='60' height='60' fill='%23FFD700' /%3E%3Ccircle cx='50' cy='50' r='30' fill='%23FF4500' /%3E%3C/svg%3E" alt="NFT Example 4">
+                    </div>
+                    <div class="nft-content">
+                        <h3 class="nft-title">Backstage Access</h3>
+                        <div class="nft-price">1.2 ETH</div>
+                        <div class="nft-owner">
+                            <div class="nft-avatar"></div>
+                            <span>Owned by @superfan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section (Embedded from community.html) -->
+    <section class="community-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Complete Fan Engagement Suite</h2>
+                <p class="section-subtitle">
+                    Multiple channels to connect with your audience and build a thriving community around your brand.
+                </p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Messaging Boards</h3>
+                    <p>Create topic-specific discussion areas where fans can connect with each other and with you.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Direct Messaging</h3>
+                    <p>Enable private conversations between you and your superfans with tiered access levels.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Engagement Analytics</h3>
+                    <p>Track which content resonates most with your audience to optimize your creative output.</p>
+                </div>
+            </div>
+
+            <div class="engagement-stats">
+                <div class="stat-card">
+                    <div class="stat-number">89%</div>
+                    <div class="stat-label">Higher engagement with multi-channel approaches</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3.5x</div>
+                    <div class="stat-label">More loyal fans with community features</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">42%</div>
+                    <div class="stat-label">Increased merch sales from notifications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Always-on fan engagement</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merch Section (Embedded from merch.html) -->
+    <section class="revenue-overview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Multiple Revenue Streams</h2>
+                <p class="section-subtitle">
+                    The MOMENTUM platform gives you complete control over your income sources, with no middlemen taking cuts of your hard-earned money.
+                </p>
+            </div>
+
+            <div class="revenue-grid">
+                <div class="revenue-card">
+                    <div class="revenue-icon">👕</div>
+                    <h3>Merchandise</h3>
+                    <p>Sell physical products from apparel to vinyl records with integrated shipping and fulfillment.</p>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-icon">🎵</div>
+                    <h3>Music Sales</h3>
+                    <p>Sell albums and individual tracks directly to fans with 100% of revenue going to you.</p>
+                </div>
+                <div class="revenue-card">
+                    <div class="revenue-icon">📹</div>
+                    <h3>Video Content</h3>
+                    <p>Monetize your videos through sales, rentals, or subscription access models.</p>
+                </div>
+            </div>
+
+            <div class="ad-banner">
+                <div class="ad-content">
+                    <div class="ad-label">SPONSORED</div>
+                    <h3 class="ad-title">Promote Your Music with MOMENTUM</h3>
+                    <p class="ad-description">Run targeted ads to reach new fans and grow your audience</p>
+                </div>
+                <div class="ad-video">
+                    <video width="100%" height="auto" controls>
+                        <source src="add1.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+
+            <div class="merch-grid">
+                <div class="merch-item">
+                    <div class="merch-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'%3E%3Crect width='300' height='300' fill='%232A1A10' /%3E%3Crect x='50' y='80' width='200' height='140' fill='%23FF8C00' /%3E%3Ccircle cx='150' cy='150' r='50' fill='%23FFD700' /%3E%3C/svg%3E" alt="T-Shirt Design">
+                        <div class="merch-badge">New Release</div>
+                    </div>
+                    <div class="merch-content">
+                        <div class="merch-category">Apparel</div>
+                        <h3 class="merch-title">Album Cover T-Shirt</h3>
+                        <div class="merch-price">
+                            <span class="current-price">$35.00</span>
+                            <span class="old-price">$45.00</span>
+                        </div>
+                        <div class="merch-actions">
+                            <a href="#" class="add-to-cart">Add to Cart</a>
+                            <button type="button" class="wishlist">♥</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merch-item">
+                    <div class="merch-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'%3E%3Crect width='300' height='300' fill='%232A1A10' /%3E%3Ccircle cx='150' cy='150' r='120' fill='%23FF4500' opacity='0.8' /%3E%3Ccircle cx='150' cy='150' r='70' fill='%231A0A0A' /%3E%3Ccircle cx='150' cy='150' r='20' fill='%23FFFFFF' /%3E%3C/svg%3E" alt="Vinyl Record">
+                    </div>
+                    <div class="merch-content">
+                        <div class="merch-category">Music</div>
+                        <h3 class="merch-title">Limited Edition Vinyl</h3>
+                        <div class="merch-price">
+                            <span class="current-price">$29.99</span>
+                        </div>
+                        <div class="merch-actions">
+                            <a href="#" class="add-to-cart">Add to Cart</a>
+                            <button type="button" class="wishlist">♥</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="merch-item">
+                    <div class="merch-img">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'%3E%3Crect width='300' height='300' fill='%232A1A10' /%3E%3Cpath d='M50,150 C50,80 250,80 250,150 C250,220 50,220 50,150 Z' fill='%23FFD700' opacity='0.6' /%3E%3Cpath d='M70,150 C70,100 230,100 230,150 C230,200 70,200 70,150 Z' fill='%23FF8C00' opacity='0.6' /%3E%3C/svg%3E" alt="Poster Design">
+                    </div>
+                    <div class="merch-content">
+                        <div class="merch-category">Art</div>
+                        <h3 class="merch-title">Tour Poster (Signed)</h3>
+                        <div class="merch-price">
+                            <span class="current-price">$24.99</span>
+                            <span class="old-price">$29.99</span>
+                        </div>
+                        <div class="merch-actions">
+                            <a href="#" class="add-to-cart">Add to Cart</a>
+                            <button type="button" class="wishlist">♥</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-container">
+                <div class="cta-content">
+                    <h2 class="cta-title">Ready to Take Control of Your Career?</h2>
+                    <p class="cta-description">
+                        Don't let platforms dictate your success. With Momentum, you build your own ecosystem where you own your data, your revenue, and your relationship with fans.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-button">Buy Template Now</a>
+                        <a href="#" class="secondary-button">Request Demo</a>
+                    </div>
+                    <div class="cta-price">
+                        MOMENTUM – <strong>$2,500</strong> One-Time Payment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section (Embedded from pfxopuiy0d.html) -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Admin Dashboard</h2>
+                <p class="section-subtitle">
+                    Powerful tools to manage your site, content, and user interactions from a single interface.
+                </p>
+            </div>
+
+            <div class="admin-dashboard">
+                <div class="dashboard-sidebar">
+                    <div class="dashboard-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">📊</div>
+                            <div class="nav-label">Dashboard</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">📝</div>
+                            <div class="nav-label">Content</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🛒</div>
+                            <div class="nav-label">Products</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👥</div>
+                            <div class="nav-label">Users</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">📈</div>
+                            <div class="nav-label">Analytics</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">⚙️</div>
+                            <div class="nav-label">Settings</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-content">
+                    <div class="dashboard-header">
+                        <h3>Welcome back, Admin</h3>
+                        <div class="date-display">Last login: Today at 10:45 AM</div>
+                        <a href="#" class="admin-back-button">← Back to Site</a>
+                    </div>
+
+                    <div class="stats-overview">
+                        <div class="stat-box">
+                            <div class="stat-value">1,254</div>
+                            <div class="stat-label">Total Visitors</div>
+                            <div class="stat-change positive">+12.5%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">$4,285</div>
+                            <div class="stat-label">Revenue</div>
+                            <div class="stat-change positive">+8.3%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">85</div>
+                            <div class="stat-label">New Subscribers</div>
+                            <div class="stat-change positive">+5.7%</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value">24</div>
+                            <div class="stat-label">Support Tickets</div>
+                            <div class="stat-change negative">+2.1%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Adaptation Section (Embedded from adaptation.html) -->
+    <section class="adaptation-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Agent Lee - Embedded Intelligence</h2>
+                <p class="section-subtitle">
+                    Advanced adaptation module for intelligent agent operations and resilience.
+                </p>
+            </div>
+
+            <div class="adaptation-dashboard">
+                <div class="adaptation-header">
+                    <h3>🧠 Agent Lee - Embedded Intelligence</h3>
+                    <div class="status-indicator">
+                        <div id="status-dot" class="status-dot active"></div>
+                        <span id="status-text">Active</span>
+                    </div>
+                </div>
+
+                <div class="adaptation-content">
+                    <div class="left-panel">
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3 class="panel-title">Learning From Feedback</h3>
+                                <button type="button" id="clear-learning-btn" class="btn btn-warning">Clear</button>
+                            </div>
+                            <div id="learning-section" class="learning-section">
+                                <div class="learning-entry">
+                                    <div class="entry-header">
+                                        <span>User Preference Detected</span>
+                                        <span class="entry-timestamp">10:45 AM</span>
+                                    </div>
+                                    <p>Color scheme preference: Yellow and red tones</p>
+                                </div>
+                                <div class="learning-entry">
+                                    <div class="entry-header">
+                                        <span>Navigation Pattern</span>
+                                        <span class="entry-timestamp">11:20 AM</span>
+                                    </div>
+                                    <p>User prefers back navigation options on all pages</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel console-panel">
+                            <div class="panel-header">
+                                <h3 class="panel-title">Agent Console</h3>
+                                <button type="button" id="clear-console-btn" class="btn btn-warning">Clear</button>
+                            </div>
+                            <div id="console-output" class="console-output">
+                                <div class="console-line"><span class="console-time">10:30:45</span> System initialized</div>
+                                <div class="console-line"><span class="console-time">10:31:12</span> Loading user preferences</div>
+                                <div class="console-line"><span class="console-time">10:32:05</span> Adapting interface elements</div>
+                                <div class="console-line"><span class="console-time">10:33:18</span> Ready for user interaction</div>
+                            </div>
+                            <div class="console-input">
+                                <div class="console-prompt">&gt;</div>
+                                <input id="console-command" class="console-command" type="text" placeholder="Type a command..." aria-label="Console command input" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="right-panel">
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3 class="panel-title">Resilience Templates</h3>
+                            </div>
+                            <div class="template-section">
+                                <div class="template-item">
+                                    <div class="template-name">Connection Lost Handler</div>
+                                    <div class="template-description">Initiates hibernation, stores state, and retries connection</div>
+                                    <div class="template-code">function handleConnectionLost() {
+  log('Connection lost detected');
+  storeCurrentState();
+  enterHibernationMode();
+
+  // Set up reconnection attempts
+  const reconnectInterval = setInterval(function() {
+    if (attemptReconnection()) {
+      clearInterval(reconnectInterval);
+      restoreFromState();
+      exitHibernationMode();
+    }
+  }, 5000);
+}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h3 class="panel-title">Helper Modules</h3>
+                            </div>
+                            <div class="helper-list">
+                                <div class="helper-item">
+                                    <div class="helper-name">task_executor <span class="helper-status status-ready">Ready</span></div>
+                                    <div class="helper-description">Analyzes goals and executes static task flows for routine CRM operations.</div>
+                                </div>
+
+                                <div class="helper-item">
+                                    <div class="helper-name">debugger_helper <span class="helper-status status-ready">Ready</span></div>
+                                    <div class="helper-description">Detects logical gaps in workflow and adjusts template routes to prevent failures.</div>
+                                </div>
+                            </div>
+
+                            <div class="btn-row">
+                                <button type="button" id="test-helper-btn" class="btn">Test Helper</button>
+                                <button type="button" id="simulate-failure-btn" class="btn btn-danger">Simulate Failure</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Database Section (Embedded from db.html) -->
+    <section class="database-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CRM Database Module</h2>
+                <p class="section-subtitle">
+                    Powerful database management system for customer relationship management.
+                </p>
+            </div>
+
+            <div class="db-status">
+                <div>
+                    <span id="db-status-indicator" class="db-status-dot"></span>
+                    <span id="db-status-text">Connected</span>
+                </div>
+                <div id="record-count">Total Records: 1,458</div>
+            </div>
+
+            <div class="db-actions">
+                <button type="button" id="backup-btn">Backup Database</button>
+                <button type="button" id="restore-btn">Restore Database</button>
+                <button type="button" id="add-sample-btn">Add Sample Data</button>
+                <button type="button" id="clear-btn">Clear Database</button>
+            </div>
+
+            <div class="panel-container">
+                <div class="left-panel">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span>Database Structure</span>
+                            <button type="button" class="refresh-btn" id="refresh-structure-btn">
+                                <span class="refresh-icon">⟳</span> Refresh
+                            </button>
+                        </div>
+                        <div class="panel-content" id="db-structure">
+                            <div class="db-store">
+                                <span class="db-store-name">contacts</span>
+                                <span class="db-store-count">845</span>
+                                <div>Primary Key: id (autoIncrement)</div>
+                                <div>Indexes: email (unique), name, category</div>
+                            </div>
+                            <div class="db-store">
+                                <span class="db-store-name">tasks</span>
+                                <span class="db-store-count">312</span>
+                                <div>Primary Key: id (autoIncrement)</div>
+                                <div>Indexes: contactId, status, dueDate</div>
+                            </div>
+                            <div class="db-store">
+                                <span class="db-store-name">notes</span>
+                                <span class="db-store-count">289</span>
+                                <div>Primary Key: id (autoIncrement)</div>
+                                <div>Indexes: contactId, createdAt</div>
+                            </div>
+                            <div class="db-store">
+                                <span class="db-store-name">settings</span>
+                                <span class="db-store-count">12</span>
+                                <div>Primary Key: key</div>
+                                <div>Indexes: none</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="panel">
+                        <div class="panel-header">
+                            <span>Performance Metrics</span>
+                        </div>
+                        <div class="panel-content">
+                            <div class="db-metrics">
+                                <div class="metric">
+                                    <div class="metric-value" id="op-count">1,245</div>
+                                    <div class="metric-label">Operations</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" id="avg-time">12 ms</div>
+                                    <div class="metric-label">Avg Response Time</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="metric-value" id="last-backup">Today</div>
+                                    <div class="metric-label">Last Backup</div>
+                                </div>
+                            </div>
+
+                            <div id="disaster-recovery-status" class="disaster-recovery-status">
+                                Disaster Recovery: Ready
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logger Section (Embedded from logger.html) -->
+    <section class="logger-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">CRM Logging Service</h2>
+                <p class="section-subtitle">
+                    Comprehensive logging system for tracking and monitoring system activities.
+                </p>
+            </div>
+
+            <div class="controls">
+                <button type="button" id="clear-logs-btn">Clear Logs</button>
+                <button type="button" id="export-logs-btn">Export Logs</button>
+                <button type="button" id="test-log-btn">Generate Test Log</button>
+            </div>
+
+            <div class="filters">
+                <span>Filter by level:</span>
+                <button type="button" class="filter-btn filter-info active" data-level="INFO">INFO</button>
+                <button type="button" class="filter-btn filter-success active" data-level="SUCCESS">SUCCESS</button>
+                <button type="button" class="filter-btn filter-warning active" data-level="WARNING">WARNING</button>
+                <button type="button" class="filter-btn filter-error active" data-level="ERROR">ERROR</button>
+                <button type="button" class="filter-btn filter-debug active" data-level="DEBUG">DEBUG</button>
+            </div>
+
+            <div id="log-container">
+                <div class="log-entry log-info">
+                    <span class="timestamp">[10:30:45]</span>
+                    <span class="module-name">[System]</span>
+                    <span class="log-level level-info">INFO</span>
+                    <span class="log-message">Application started successfully</span>
+                </div>
+                <div class="log-entry log-success">
+                    <span class="timestamp">[10:32:12]</span>
+                    <span class="module-name">[Database]</span>
+                    <span class="log-level level-success">SUCCESS</span>
+                    <span class="log-message">Connected to database</span>
+                </div>
+                <div class="log-entry log-warning">
+                    <span class="timestamp">[10:35:08]</span>
+                    <span class="module-name">[Cache]</span>
+                    <span class="log-level level-warning">WARNING</span>
+                    <span class="log-message">Cache size approaching limit</span>
+                </div>
+                <div class="log-entry log-error">
+                    <span class="timestamp">[10:40:23]</span>
+                    <span class="module-name">[API]</span>
+                    <span class="log-level level-error">ERROR</span>
+                    <span class="log-message">Failed to connect to external service</span>
+                </div>
+                <div class="log-entry log-debug">
+                    <span class="timestamp">[10:42:56]</span>
+                    <span class="module-name">[Auth]</span>
+                    <span class="log-level level-debug">DEBUG</span>
+                    <span class="log-message">User authentication process details</span>
+                </div>
+            </div>
+
+            <div class="status-bar">
+                <div id="log-count">Logs: 5</div>
+                <div id="logger-status">Logger Active</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Worker Section (Embedded from worker.html) -->
+    <section class="worker-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Worker Module</h2>
+                <p class="section-subtitle">
+                    Background task processing system for handling asynchronous operations.
+                </p>
+            </div>
+
+            <div class="worker-header">
+                <h3>Worker Status</h3>
+                <div id="status-badge" class="status-badge">Ready</div>
+            </div>
+
+            <div class="worker-stats">
+                <h3>Worker Stats</h3>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div id="tasks-completed" class="stat-value">128</div>
+                        <div class="stat-label">Tasks Completed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="tasks-pending" class="stat-value">3</div>
+                        <div class="stat-label">Tasks Pending</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="avg-process-time" class="stat-value">245ms</div>
+                        <div class="stat-label">Avg. Process Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div id="encryption-status" class="stat-value">On</div>
+                        <div class="stat-label">Encryption</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-list" id="task-list">
+                <div class="task-item">
+                    <div class="task-header">
+                        <div class="task-id">TASK-001</div>
+                        <div class="task-status status-completed">Completed</div>
+                    </div>
+                    <div class="task-content">
+                        <p>Process monthly customer data analysis</p>
+                    </div>
+                    <div class="task-time">Completed at: 10:15 AM (Duration: 1.2s)</div>
+                </div>
+
+                <div class="task-item">
+                    <div class="task-header">
+                        <div class="task-id">TASK-002</div>
+                        <div class="task-status status-processing">Processing</div>
+                    </div>
+                    <div class="task-content">
+                        <p>Generate quarterly sales report</p>
+                    </div>
+                    <div class="task-time">Started at: 10:45 AM</div>
+                </div>
+
+                <div class="task-item">
+                    <div class="task-header">
+                        <div class="task-id">TASK-003</div>
+                        <div class="task-status status-pending">Pending</div>
+                    </div>
+                    <div class="task-content">
+                        <p>Backup customer database</p>
+                    </div>
+                    <div class="task-time">Scheduled for: 11:00 AM</div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button type="button" id="spawn-child-btn">Spawn Child Worker</button>
+                <button type="button" id="task-test-btn">Run Test Task</button>
+                <button type="button" id="toggle-encryption-btn">Toggle Encryption</button>
+                <button type="button" id="run-stress-test-btn">Run Stress Test</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-accent">MOMEN</span>TUM
+                    </a>
+                    <p class="footer-description">
+                        A multi-page digital HQ you control end-to-end, with all NFT, merch, and membership revenue flowing directly to you.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link twitter" title="Twitter">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                            <span class="sr-only">Twitter</span>
+                        </a>
+                        <a href="#" class="social-link instagram" title="Instagram">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                            <span class="sr-only">Instagram</span>
+                        </a>
+                        <a href="#" class="social-link facebook" title="Facebook">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                            <span class="sr-only">Facebook</span>
+                        </a>
+                        <a href="#" class="social-link snapchat" title="Snapchat">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.36-.135-.553-.045-.195-.105-.42-.164-.575-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.046-.134-.046-.209-.015-.224.165-.449.42-.493 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z"/>
+                            </svg>
+                            <span class="sr-only">Snapchat</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Site Map</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="bio.html">Bio</a></li>
+                        <li><a href="merch.html">Merch</a></li>
+                        <li><a href="pfxopuiy0d.html">Admin</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">NFT Drops</a></li>
+                        <li><a href="#">Merch Store</a></li>
+                        <li><a href="#">Video Vault</a></li>
+                        <li><a href="#">Fan Memberships</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                &copy; 2023 MOMENTUM. All rights reserved. This is a template.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.querySelector('.main-nav');
+
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Responsive adjustments
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mainNav.style.display = 'block';
+            } else {
+                mainNav.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

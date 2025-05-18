@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Bio - MOMENTUM Template</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Base variables */
+        :root {
+            --primary-bg: #0A192F;
+            --secondary-bg: #112240;
+            --accent-teal: #00FFD4;
+            --accent-purple: #6A0DAD;
+            --accent-coral: #FF4757;
+            --text-primary: #E6F1FF;
+            --text-secondary: #8892B0;
+            --shadow-normal: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+            --shadow-hover: 0 20px 40px rgba(0, 255, 212, 0.2);
+            --transition-standard: all 0.3s ease;
+            --template-badge-bg: #FF0000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Template Banner */
+        .template-badge {
+            position: fixed;
+            top: 50%;
+            right: -65px;
+            transform: rotate(90deg) translateY(-50%);
+            background-color: var(--template-badge-bg);
+            color: white;
+            padding: 8px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            z-index: 9999;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 1px;
+        }
+        
+        .template-ribbon {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--template-badge-bg);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .template-ribbon a {
+            color: white;
+            text-decoration: underline;
+            font-weight: 900;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            padding: 2rem 0;
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-accent {
+            background: linear-gradient(to right, var(--accent-teal), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding-right: 5px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            position: relative;
+            transition: var(--transition-standard);
+        }
+
+        .main-nav a:hover {
+            color: var(--accent-teal);
+        }
+
+        .main-nav a.active {
+            color: var(--accent-teal);
+        }
+
+        .main-nav a.active::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-teal);
+            bottom: -6px;
+            left: 0;
+        }
+
+        .cta-button {
+            background: linear-gradient(to right, var(--accent-teal), var(--accent-purple));
+            color: var(--primary-bg);
+            font-weight: 600;
+            padding: 0.8rem 1.8rem;
+            border-radius: 4px;
+            transition: var(--transition-standard);
+            border: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        /* Mobile menu button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Bio Page Specific Styles */
+        .page-header {
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(106, 13, 173, 0.3), transparent 70%);
+            z-index: -1;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .page-title span {
+            background: linear-gradient(to right, var(--accent-teal), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Bio Content Styles */
+        .bio-section {
+            padding: 4rem 0;
+        }
+
+        .bio-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .bio-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-normal);
+        }
+
+        .bio-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .bio-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid var(--accent-teal);
+            border-radius: 12px;
+            opacity: 0.3;
+        }
+
+        .bio-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+
+        .bio-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .bio-content .highlight {
+            color: var(--accent-teal);
+            font-weight: 700;
+        }
+
+        .bio-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--accent-purple), transparent);
+            margin: 4rem 0;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 4rem 0;
+            background-color: var(--secondary-bg);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background-color: rgba(10, 25, 47, 0.5);
+            border-radius: 12px;
+            transition: var(--transition-standard);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--accent-teal);
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--accent-teal), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .timeline-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .timeline-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--accent-teal);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            padding: 1rem 0;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 2.5rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 2.5rem;
+        }
+
+        .timeline-content {
+            padding: 2rem;
+            background-color: var(--secondary-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow-normal);
+            transition: var(--transition-standard);
+            position: relative;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            right: -15px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid var(--secondary-bg);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: -15px;
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid var(--secondary-bg);
+        }
+
+        .timeline-date {
+            color: var(--accent-teal);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-purple);
+            border: 4px solid var(--accent-teal);
+            border-radius: 50%;
+            top: 30px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -10px;
+        }
+
+        /* Video Feature */
+        .video-feature {
+            padding: 6rem 0;
+            background-color: var(--secondary-bg);
+        }
+
+        .video-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .video-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .video-description {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+        }
+
+        .video-frame {
+            width: 100%;
+            height: 450px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow-normal);
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1rem;
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.8) 0%, rgba(17, 34, 64, 0.8) 100%);
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 255, 212, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition-standard);
+        }
+
+        .play-button::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid var(--accent-teal);
+            margin-left: 5px;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: rgba(0, 255, 212, 0.4);
+        }
+
+        .video-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            padding: 6rem 0;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-description {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group.full {
+            grid-column: 1 / 3;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background-color: rgba(17, 34, 64, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition-standard);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-teal);
+            box-shadow: 0 0 0 2px rgba(0, 255, 212, 0.2);
+        }
+
+        textarea.form-input {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            grid-column: 1 / 3;
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 5rem 0 2rem;
+            background-color: var(--secondary-bg);
+            position: relative;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 900;
+            display: inline-block;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-standard);
+            overflow: hidden;
+        }
+        
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+        }
+        
+        .social-link.twitter {
+            background-color: #000000;
+        }
+        
+        .social-link.twitter:hover {
+            background-color: #1DA1F2;
+        }
+        
+        .social-link.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+        
+        .social-link.facebook {
+            background-color: #1877F2;
+        }
+        
+        .social-link.snapchat {
+            background-color: #FFFC00;
+        }
+        
+        .social-link.snapchat svg {
+            fill: #000000;
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            transition: var(--transition-standard);
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-teal);
+        }
+
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Media Queries */
+        @media (max-width: 1024px) {
+            .bio-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .bio-image {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .main-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .timeline::before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+                left: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content::after,
+            .timeline-item:nth-child(even) .timeline-content::after {
+                display: none;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-dot,
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 20px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full {
+                grid-column: 1;
+            }
+            
+            .form-submit {
+                grid-column: 1;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Template Indicators -->
+    <div class="template-ribbon">
+        🔥 THIS IS A TEMPLATE FOR SALE - Premium Artist Website Template - <a href="#">BUY NOW $2,500</a> 🔥
+    </div>
+    <div class="template-badge">TEMPLATE</div>
+    
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span class="logo-accent">MOMEN</span>TUM
+            </a>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="bio.html" class="active">Bio</a></li>
+                    <li><a href="merch.html">Merch</a></li>
+                    <li><a href="community.html">Community</a></li>
+                    <li><a href="pfxopuiy0d.html">Admin</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn">☰</button>
+            
+            <a href="#" class="cta-button">Get Started</a>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">About <span>The Artist</span></h1>
+            <p class="page-subtitle">
+                This page is fully customizable to showcase your unique story, career highlights, and connect authentically with your fans.
+            </p>
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="bio-section">
+        <div class="container bio-container">
+            <div class="bio-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800' width='600' height='800'%3E%3Crect width='600' height='800' fill='%230A192F' /%3E%3Ccircle cx='300' cy='250' r='180' fill='%236A0DAD' /%3E%3Crect x='150' y='400' width='300' height='350' fill='%2300FFD4' opacity='0.5' /%3E%3C/svg%3E" alt="Artist Profile Image">
+            </div>
+            
+            <div class="bio-content">
+                <h2>The Story</h2>
+                <p>
+                    Born in [City], [Artist Name] has been creating music since the age of [age]. What started as a bedroom project has evolved into a full-fledged artistic vision that spans music, visual art, and digital experiences.
+                </p>
+                <p>
+                    After releasing [First Project] in [Year], [Artist Name] gained recognition for <span class="highlight">[unique sound or characteristic]</span>. This distinctive approach has earned [him/her/them] a devoted following and critical acclaim from publications like [Publication] and [Publication].
+                </p>
+                <p>
+                    <span class="highlight">[Artist Name]</span> has performed at venues across [Locations] and shared stages with artists like [Artist], [Artist], and [Artist]. Each show is a carefully crafted experience that merges music, visuals, and storytelling.
+                </p>
+                <p>
+                    Outside of music, [Artist Name] is passionate about [Cause/Interest], and works with [Organization] to [Positive Impact]. This commitment to [Value] informs both the art and business decisions.
+                </p>
+            </div>
+        </div>
+        
+        <div class="bio-divider"></div>
+        
+        <div class="container bio-container">
+            <div class="bio-content">
+                <h2>The Vision</h2>
+                <p>
+                    [Artist Name]'s work explores themes of <span class="highlight">[Theme]</span>, <span class="highlight">[Theme]</span>, and <span class="highlight">[Theme]</span>. Each project is an opportunity to push creative boundaries while maintaining an authentic connection with the audience.
+                </p>
+                <p>
+                    "I believe that [Artistic Philosophy]," says [Artist Name]. "My goal is to [Mission Statement], creating work that [Desired Impact]."
+                </p>
+                <p>
+                    The current project, [Project Name], explores [Concept] through [Medium/Approach]. It represents the next evolution in a body of work that continues to grow and challenge expectations.
+                </p>
+                <p>
+                    Through the Momentum platform, [Artist Name] is building a direct relationship with fans, creating exclusive experiences, and maintaining creative control over every aspect of the artistic vision.
+                </p>
+            </div>
+            
+            <div class="bio-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 800' width='600' height='800'%3E%3Crect width='600' height='800' fill='%230A192F' /%3E%3Crect x='100' y='100' width='400' height='300' fill='%23FF4757' opacity='0.7' /%3E%3Ccircle cx='300' cy='550' r='200' fill='%2300FFD4' opacity='0.5' /%3E%3C/svg%3E" alt="Artist Vision Image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">15M+</div>
+                    <div class="stat-label">Streams</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">250K</div>
+                    <div class="stat-label">Followers</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">75</div>
+                    <div class="stat-label">Shows Performed</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">25</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section">
+        <div class="container">
+            <div class="timeline-header">
+                <h2>Career Highlights</h2>
+                <p>
+                    From humble beginnings to major achievements, this timeline captures the key moments in this artistic journey.
+                </p>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2017</div>
+                        <h3 class="timeline-title">First EP Release</h3>
+                        <p class="timeline-description">
+                            Released debut EP "[Title]" independently, which garnered attention from local radio and blogs.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018</div>
+                        <h3 class="timeline-title">First National Tour</h3>
+                        <p class="timeline-description">
+                            Embarked on a 15-city tour, opening for [Artist Name] and building a dedicated fanbase.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019</div>
+                        <h3 class="timeline-title">Major Festival Debut</h3>
+                        <p class="timeline-description">
+                            Performed at [Festival Name], sharing the stage with industry icons and reaching new audiences.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <h3 class="timeline-title">Breakthrough Album</h3>
+                        <p class="timeline-description">
+                            Released "[Album Title]" to critical acclaim, featured in [Major Publication] and reaching #[Number] on [Chart].
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021</div>
+                        <h3 class="timeline-title">International Recognition</h3>
+                        <p class="timeline-description">
+                            Expanded to global markets with performances in [Countries], and collaborations with [International Artists].
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <h3 class="timeline-title">Industry Award</h3>
+                        <p class="timeline-description">
+                            Received [Award Name] for [Category], cementing position as a leading voice in the genre.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">Launch of Momentum Platform</h3>
+                        <p class="timeline-description">
+                            Created direct-to-fan platform with exclusive content, NFT drops, and a new approach to artist ownership.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Feature -->
+    <section class="video-feature">
+        <div class="container">
+            <h2 class="video-title">Behind The Scenes</h2>
+            <p class="video-description">
+                Get an exclusive look at the creative process, studio sessions, and the story behind the music.
+            </p>
+            
+            <div class="video-container">
+                <div class="video-frame">
+                    <div class="video-placeholder">
+                        <div class="play-button"></div>
+                        <div class="video-text">Watch Artist Documentary</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="container contact-container">
+            <h2 class="contact-title">Get In Touch</h2>
+            <p class="contact-description">
+                For booking inquiries, collaboration opportunities, or just to say hello, use the form below to send a message directly to the team.
+            </p>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Your name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" class="form-input" placeholder="Your email address">
+                </div>
+                
+                <div class="form-group full">
+                    <label for="subject" class="form-label">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="What is this regarding?">
+                </div>
+                
+                <div class="form-group full">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea id="message" class="form-input" placeholder="Your message here..."></textarea>
+                </div>
+                
+                <div class="form-submit">
+                    <button type="submit" class="cta-button">Send Message</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="footer-logo">
+                        <span class="logo-accent">MOMEN</span>TUM
+                    </a>
+                    <p class="footer-description">
+                        A multi-page digital HQ you control end-to-end, with all NFT, merch, and membership revenue flowing directly to you.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link twitter">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link instagram">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link facebook">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="social-link snapchat">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.206.793c.99 0 4.347.276 5.93 3.821.529 1.193.403 3.219.299 4.847l-.003.06c-.012.18-.022.345-.03.51.075.045.203.09.401.09.3-.016.659-.12 1.033-.301.165-.088.344-.104.464-.104.182 0 .359.029.509.09.45.149.734.479.734.838.015.449-.39.839-1.213 1.168-.089.029-.209.075-.344.119-.45.135-1.139.36-1.333.81-.09.224-.061.524.12.868l.015.015c.06.136 1.526 3.475 4.791 4.014.255.044.435.27.42.509 0 .075-.015.149-.045.225-.24.569-1.273.988-3.146 1.271-.059.091-.12.375-.164.57-.029.179-.074.36-.134.553-.076.271-.27.405-.555.405h-.03c-.135 0-.313-.031-.538-.074-.36-.075-.765-.135-1.273-.135-.3 0-.599.015-.913.074-.6.104-1.123.464-1.723.884-.853.599-1.826 1.288-3.294 1.288-.06 0-.119-.015-.18-.015h-.149c-1.468 0-2.427-.675-3.279-1.288-.599-.42-1.107-.779-1.707-.884-.314-.045-.629-.074-.928-.074-.54 0-.958.089-1.272.149-.211.043-.391.074-.54.074-.374 0-.523-.224-.583-.42-.061-.192-.09-.36-.135-.553-.045-.195-.105-.42-.164-.575-1.918-.222-2.95-.642-3.189-1.226-.031-.063-.046-.134-.046-.209-.015-.224.165-.449.42-.493 3.264-.54 4.73-3.879 4.791-4.02l.016-.029c.18-.345.224-.645.119-.869-.195-.434-.884-.658-1.332-.809-.121-.029-.24-.074-.346-.119-1.107-.435-1.257-.93-1.197-1.273.09-.479.674-.793 1.168-.793.146 0 .27.029.383.074.42.194.789.3 1.104.3.234 0 .384-.06.465-.105l-.046-.569c-.098-1.626-.225-3.651.307-4.837C7.392 1.077 10.739.807 11.727.807l.419-.015h.06z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Site Map</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="bio.html">Bio</a></li>
+                        <li><a href="merch.html">Merch</a></li>
+                        <li><a href="pfxopuiy0d.html">Admin</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Features</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">NFT Drops</a></li>
+                        <li><a href="#">Merch Store</a></li>
+                        <li><a href="#">Video Vault</a></li>
+                        <li><a href="#">Fan Memberships</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3 class="footer-title">Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 MOMENTUM. All rights reserved. This is a template.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mainNav = document.querySelector('.main-nav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.style.display = mainNav.style.display === 'block' ? 'none' : 'block';
+        });
+        
+        // Responsive adjustments
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                mainNav.style.display = 'block';
+            } else {
+                mainNav.style.display = 'none';
+            }
+        });
+        
+        // Video player functionality (placeholder)
+        const playButton = document.querySelector('.play-button');
+        const videoPlaceholder = document.querySelector('.video-placeholder');
+        
+        playButton.addEventListener('click', function() {
+            // In a real implementation, this would play the video
+            alert('In a real implementation, this would load and play the video content.');
+        });
+    </script>
+</body>
+</html>
