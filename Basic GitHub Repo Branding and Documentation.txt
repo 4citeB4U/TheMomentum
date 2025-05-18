@@ -1,0 +1,55 @@
+
+/README.md
+```markdown
+# 🧠 LEEWAY™ MASTER ENGINEERING DIRECTIVE v5.2
+
+**Universal SPA Compiler – For Any App, Website, or Codebase**
+
+[![GitHub license](https://img.shields.io/github/license/4citeB4U/TheMomentum)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/4citeB4U/TheMomentum?style=social)](https://github.com/4citeB4U/TheMomentum)
+
+---
+
+Welcome to the official repository for **LEEWAY™ MASTER ENGINEERING DIRECTIVE v5.2**.
+
+- **Purpose:** A context-aware, universal Single-Page Application (SPA) compiler that can assist, generate, and optimize any app, website, or codebase.
+- **AI Context-Persistent Mode Enabled:** This project is designed to support persistent context across engineering sessions.
+
+## Getting Started
+
+1. Clone the repository:<br>
+   `git clone https://github.com/4citeB4U/TheMomentum.git`
+2. Read the [Contributing Guidelines](CONTRIBUTING.md)
+3. Start building your next-gen SPA!
+
+## Directives
+
+Add your own project directive here.
+
+---
+
+> © LEEWAY™ - All rights reserved.
+```
+
+/CONTRIBUTING.md
+```markdown
+# Contributing to 🧠 LEEWAY™ MASTER ENGINEERING DIRECTIVE
+
+Thank you for considering contributing! To keep it simple:
+
+1. Fork the repo and make your changes.
+2. Open a Pull Request with a clear description.
+3. Follow the code style and documentation patterns in this repo.
+
+Questions or need guidance? Create an Issue!
+
+> Let’s work together to make Universal SPA development effortless.
+```
+
+/.github/ (empty directory for future workflows)
+
+/.ai-context-placeholder.txt
+```
+# This file will be used for context-persistence settings in future versions.
+# AI session/context data may be stored here.
+```
